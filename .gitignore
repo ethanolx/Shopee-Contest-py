@@ -1,0 +1,5 @@
+# Zip Files
+**/*.zip
+
+# Python Cache Files
+**/__pycache__
