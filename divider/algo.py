@@ -1,5 +1,6 @@
 from typing import List, cast
 import numpy as np
+import pandas as pd
 
 
 def combine(l: List[int], gc: List[int], dividers: np.ndarray, i: int):
@@ -54,14 +55,14 @@ def combined(l: List[int], num_of_dividers: int):
     return get_total_noise(l, group_count), get_dividers(group_count), np.vstack((np.array(l).reshape((1, -1)), np.array(group_count).reshape((1, -1))))
 
 
-def evaluate(l: List[int], divs: int):
-    lowest_noise_level = sum(l)
-    total_noise_level, divider_positions, merged_groups = combined(l, divs)
+def divider_evaluate(engineers: List[int], dividers: int):
+    lowest_noise_level = sum(engineers)
+    total_noise_level, divider_positions, merged_groups = combined(engineers, dividers)
     print(f'''
 Group Matrix:
-{merged_groups}
+{pd.DataFrame(data=merged_groups, index=['Collective Noise', 'Group Size'])}
 
-Divider Positions:
+Divider Positions (right of 0-based index):
 {divider_positions}
 
 Lowest Noise Level (Unlimited Dividers):

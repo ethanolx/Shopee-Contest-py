@@ -12,8 +12,8 @@ def combined(l: List[int], threshold: int):
             num_of_combinations += 1
     return num, combinations, num_of_combinations
 
-def evaluate(l: List[int], threshold: int):
-    num, combinations, num_of_combs = combined(l, threshold)
+def shoffee_evaluate(expectations: List[int], threshold: int):
+    num, combinations, num_of_combs = combined(expectations, threshold)
     print(f'''
 Combinations That Meet Threshold:
 {combinations}

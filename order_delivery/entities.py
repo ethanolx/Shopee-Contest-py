@@ -1,14 +1,14 @@
 # Strong Typing Dependency
-from typing import List
+from typing import List, Tuple
 
 # Represent graph using list of adjacency lists
-
-
 class Graph():
     adj: List[List[int]]
 
-    def __init__(self, nodes: int = 0):
+    def __init__(self, nodes: int = 0, edges: List[Tuple[int, int]] = []):
         self.adj = [[] for _ in range(nodes)]
+        for edge in edges:
+            self.addEdge(edge[0], edge[1])
 
     def addEdge(self, fr: int, to: int) -> None:
         self.adj[fr - 1].append(to - 1)

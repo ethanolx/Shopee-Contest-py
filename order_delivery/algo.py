@@ -112,14 +112,14 @@ def reallocate_stocks(alloc: pd.DataFrame, fees: np.ndarray, warehouses: List[Wa
     transfer_vals = sorted(transfer_vals, key=lambda el: el[0], reverse=True)
     for j in range(alloc.shape[0]):
         next_action = transfer_vals[j]
-        _, row, col_from, col_to = next_action
+        __, row, col_from, col_to = next_action
         if alloc.iloc[row, col_from] >= np.abs(overload.iloc[i]):
             transfer(alloc, (row, col_from),
-                     (row, col_to), np.abs(overload.iloc[i]))
+                    (row, col_to), np.abs(overload.iloc[i]))
             break
         else:
             transfer(alloc, (row, col_from), (row, col_to),
-                     alloc.iloc[row, col_from]) # type: ignore
+                    alloc.iloc[row, col_from]) # type: ignore
 
 # Combined function
 def combined(g: Graph, warehouses: List[Warehouse], orders: List[Customer]):
@@ -130,8 +130,8 @@ def combined(g: Graph, warehouses: List[Warehouse], orders: List[Customer]):
     return route_matrix, fees, alloc, least_cost, get_total_cost(alloc, fees)
 
 # Overall function
-def evaluate(g: Graph, w: List[Warehouse], o: List[Customer]) -> None:
-    result = combined(g, w, o)
+def order_delivery_evaluate(graph: Graph, warehouses: List[Warehouse], orders: List[Customer]) -> None:
+    result = combined(graph, warehouses, orders)
     route_matrix, fee_matrix, alloc_matrix, lowest_cost, lowest_feasible_cost = result
     print(f'''
 Route Matrix:
